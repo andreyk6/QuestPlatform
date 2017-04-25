@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Models
+namespace Store.Enums
 {
-    public class Class1
+    public enum QuizState
     {
+        Active,
+        Completed,
+        Failed
     }
 }

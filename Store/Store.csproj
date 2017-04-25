@@ -40,11 +40,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Enums\GameState.cs" />
+    <Compile Include="Enums\QuizState.cs" />
+    <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Models\Beacon.cs" />
+    <Compile Include="Models\BeaconInPark.cs" />
+    <Compile Include="Models\Game.cs" />
+    <Compile Include="Models\Option.cs" />
+    <Compile Include="Models\Park.cs" />
+    <Compile Include="Models\Question.cs" />
+    <Compile Include="Models\Quiz.cs" />
+    <Compile Include="Models\QuizTask.cs" />
+    <Compile Include="Models\UserInGame.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
