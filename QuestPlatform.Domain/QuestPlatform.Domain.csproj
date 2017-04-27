@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F8F7C35F-0BF8-46DA-A30D-713C026C65A1}</ProjectGuid>
+    <ProjectGuid>{C9FC884D-5234-4977-9C83-F6F201559095}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Store</RootNamespace>
-    <AssemblyName>Store</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <RootNamespace>QuestPlatform.Domain</RootNamespace>
+    <AssemblyName>QuestPlatform.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -57,26 +57,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enums\GameState.cs" />
-    <Compile Include="Enums\QuizState.cs" />
-    <Compile Include="Models\ApplicationUser.cs" />
-    <Compile Include="Models\Beacon.cs" />
-    <Compile Include="Models\BeaconInPark.cs" />
-    <Compile Include="Models\Bonus.cs" />
-    <Compile Include="Models\Game.cs" />
-    <Compile Include="Models\Option.cs" />
-    <Compile Include="Models\Order.cs" />
-    <Compile Include="Models\Park.cs" />
-    <Compile Include="Models\Question.cs" />
-    <Compile Include="Models\Quiz.cs" />
-    <Compile Include="Models\QuizTask.cs" />
-    <Compile Include="Models\UserInGame.cs" />
+    <Compile Include="Context\DataDbContext.cs" />
+    <Compile Include="Infrastructure\Contracts\IRepository.cs" />
+    <Compile Include="Infrastructure\Contracts\ISpecification.cs" />
+    <Compile Include="Infrastructure\Specifications\Composing\AndSpecification.cs" />
+    <Compile Include="Infrastructure\Specifications\Composing\NotSpecification.cs" />
+    <Compile Include="Infrastructure\Specifications\Composing\OrSpecification.cs" />
+    <Compile Include="Infrastructure\Specifications\ConfigureSpecification\Specification.cs" />
+    <Compile Include="Infrastructure\Specifications\ConfigureSpecification\SpecificationParameterRebinder.cs" />
+    <Compile Include="Infrastructure\Specifications\ConfigureSpecification\SpecificationsExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Store\Store.csproj">
+      <Project>{f8f7c35f-0bf8-46da-a30d-713c026c65a1}</Project>
+      <Name>Store</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Infrastructure\Repositories\" />
+    <Folder Include="Infrastructure\Specifications\Concrette\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
