@@ -60,6 +60,9 @@
     <Compile Include="Context\DataDbContext.cs" />
     <Compile Include="Infrastructure\Contracts\IRepository.cs" />
     <Compile Include="Infrastructure\Contracts\ISpecification.cs" />
+    <Compile Include="Infrastructure\Contracts\IUserRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\AbstractRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\UserRepository.cs" />
     <Compile Include="Infrastructure\Specifications\Composing\AndSpecification.cs" />
     <Compile Include="Infrastructure\Specifications\Composing\NotSpecification.cs" />
     <Compile Include="Infrastructure\Specifications\Composing\OrSpecification.cs" />
@@ -79,7 +82,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Infrastructure\Repositories\" />
     <Folder Include="Infrastructure\Specifications\Concrette\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
