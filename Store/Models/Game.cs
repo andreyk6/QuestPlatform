@@ -15,8 +15,10 @@ namespace Store.Models
         public string TeamName { get; set; }
         //TODO: Add DB trigger "Score = Quizzes.Sum(q=>q.Score)/Quizzes.Count()"
         public int Score { get; set; }
-        //TODO: 
-        public int Discount { get; set; }
+
+        public Guid BonusId { get; set; }
+        public virtual Bonus Bonus { get; set; }
+
 
         public Guid ParkId { get; set; }
         public virtual Park Park { get; set; }
