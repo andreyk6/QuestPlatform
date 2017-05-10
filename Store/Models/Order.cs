@@ -10,8 +10,8 @@ namespace Store.Models
     {
         public Guid Id { get; set; }
 
-        public Guid UserInGameId { get; set; }
-        public virtual UserInGame UserInGame { get; set; }
+        public Guid ApplicationUserId { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
 
         public Guid BonusId { get; set; }
         public virtual Bonus Bonus { get; set; }

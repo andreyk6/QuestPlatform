@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Store.Enums;
 
 namespace Store.Models
 {
@@ -15,5 +17,7 @@ namespace Store.Models
 
         public DateTime IssueDate { get; set; }
         public DateTime ExpireDate { get; set; }
+        public BonusType BonusType { get; set; }
+        public decimal Value { get; set; }
     }
 }
