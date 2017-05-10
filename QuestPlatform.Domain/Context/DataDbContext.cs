@@ -13,8 +13,8 @@ namespace QuestPlatform.Domain.Context
     {
         public DataDbContext() : base("QuestsDbContext")
         {
+            Database.SetInitializer(new DropCreateDatabaseAlways<DataDbContext>());
         }
-
         public DbSet<Beacon> Beacons { get; set; }
         public DbSet<BeaconInPark> BeaconsInPark { get; set; }
         public DbSet<Bonus> Bonuses { get; set; }
@@ -26,5 +26,11 @@ namespace QuestPlatform.Domain.Context
         public DbSet<Quiz> Quizes { get; set; }
         public DbSet<QuizTask> QuizTasks { get; set; }
         public DbSet<UserInGame> UsersInGame { get; set; }
+
+
+        public static DataDbContext Create()
+        {
+            return new DataDbContext();
+        }
     }
 }

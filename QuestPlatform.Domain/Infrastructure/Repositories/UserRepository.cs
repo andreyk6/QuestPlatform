@@ -34,9 +34,10 @@ namespace QuestPlatform.Domain.Infrastructure.Repositories
             return await _userManager.Users.ToArrayAsync();
         }
 
-        public async Task CreateAsync(ApplicationUser user, string password)
+        public async Task<IdentityResult> CreateAsync(ApplicationUser user, string password)
         {
-            await _userManager.CreateAsync(user, password);
+            var result = await _userManager.CreateAsync(user, password);
+            return result;
         }
 
         public async Task EditAsync(ApplicationUser user)
@@ -44,9 +45,24 @@ namespace QuestPlatform.Domain.Infrastructure.Repositories
             await _userManager.UpdateAsync(user);
         }
 
+        public async Task<IdentityResult> EditPassword(string userId, string oldPassword, string newPassword)
+        {
+            return await _userManager.ChangePasswordAsync(userId, oldPassword, newPassword);
+        }
+
+        public async Task<IdentityResult> SetPassword(string userId, string newPassword)
+        {
+            return await _userManager.AddPasswordAsync(userId, newPassword);
+        }
+
         public async Task<ApplicationUser> GetUserByNameAsync(string username)
         {
             return await _userManager.FindByNameAsync(username);
+        }
+
+        public async Task<IdentityResult> AddLoginAsync(string userId, UserLoginInfo login)
+        {
+            return await _userManager.AddLoginAsync(userId, login);
         }
     }
 }
