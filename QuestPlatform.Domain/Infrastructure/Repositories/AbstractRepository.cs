@@ -28,7 +28,7 @@ namespace QuestPlatform.Domain.Infrastructure.Repositories
         public abstract Task<T> GetById(Guid id);
         public abstract Task<IEnumerable<T>> Get();
         public abstract IQueryable<T> Query(ISpecification<T> condition);
-        public abstract void Insert(T entity);
+        public abstract Task<T> Insert(T entity);
         public abstract Task Delete(Guid id);
         public abstract void Update(T entity);
         public abstract Task Save();

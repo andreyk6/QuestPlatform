@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,8 @@ namespace Store.Models
 {
     public class Bonus
     {
+        [Key]
+        [ForeignKey("Game")]
         public Guid Id { get; set; }
 
         public Guid GameId { get; set; }

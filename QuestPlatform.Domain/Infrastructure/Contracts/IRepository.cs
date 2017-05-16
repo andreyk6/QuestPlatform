@@ -11,7 +11,7 @@ namespace QuestPlatform.Domain.Infrastructure.Contracts
         Task<T> GetById(Guid id);
         Task<IEnumerable<T>> Get();
         IQueryable<T> Query(ISpecification<T> condition);
-        void Insert(T entity);
+        Task<T> Insert(T entity);
         Task Delete(Guid id);
         void Update(T entity);
         Task Save();

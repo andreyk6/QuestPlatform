@@ -26,9 +26,11 @@ namespace QuestPlatform.Domain.Infrastructure.Repositories
             return Set.Where(condition.IsSatisifiedBy());
         }
 
-        public override void Insert(T entity)
+        public override async Task<T> Insert(T entity)
         {
-            Set.Add(entity);
+            var insertedItem = Set.Add(entity);
+            await Save();
+            return insertedItem;
         }
 
         public override async Task Delete(Guid id)
@@ -44,12 +46,14 @@ namespace QuestPlatform.Domain.Infrastructure.Repositories
                 Set.Attach(entityToDelete);
             }
             Set.Remove(entityToDelete);
+            Task.Run(Save);
         }
 
         public override void Update(T entity)
         {
             Set.Attach(entity);
             Context.Entry(entity).State = EntityState.Modified;
+            Task.Run(Save);
         }
 
         public override async Task Save()

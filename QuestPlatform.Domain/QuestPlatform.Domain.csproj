@@ -67,6 +67,7 @@
     <Compile Include="Infrastructure\Specifications\Composing\AndSpecification.cs" />
     <Compile Include="Infrastructure\Specifications\Composing\NotSpecification.cs" />
     <Compile Include="Infrastructure\Specifications\Composing\OrSpecification.cs" />
+    <Compile Include="Infrastructure\Specifications\Concrette\Questions\CorrectAnswerForQuestion.cs" />
     <Compile Include="Infrastructure\Specifications\ConfigureSpecification\Specification.cs" />
     <Compile Include="Infrastructure\Specifications\ConfigureSpecification\SpecificationParameterRebinder.cs" />
     <Compile Include="Infrastructure\Specifications\ConfigureSpecification\SpecificationsExtensions.cs" />
@@ -82,9 +83,7 @@
       <Name>Store</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Infrastructure\Specifications\Concrette\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
