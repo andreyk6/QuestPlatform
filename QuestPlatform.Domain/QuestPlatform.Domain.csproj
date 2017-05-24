@@ -62,12 +62,14 @@
     <Compile Include="Infrastructure\Contracts\ISpecification.cs" />
     <Compile Include="Infrastructure\Contracts\IUserRepository.cs" />
     <Compile Include="Infrastructure\Repositories\AbstractRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\QuestionRepository.cs" />
     <Compile Include="Infrastructure\Repositories\Repository.cs" />
     <Compile Include="Infrastructure\Repositories\UserRepository.cs" />
     <Compile Include="Infrastructure\Specifications\Composing\AndSpecification.cs" />
     <Compile Include="Infrastructure\Specifications\Composing\NotSpecification.cs" />
     <Compile Include="Infrastructure\Specifications\Composing\OrSpecification.cs" />
     <Compile Include="Infrastructure\Specifications\Concrette\Questions\CorrectAnswerForQuestion.cs" />
+    <Compile Include="Infrastructure\Specifications\Concrette\Questions\OptionsForQuestionId.cs" />
     <Compile Include="Infrastructure\Specifications\ConfigureSpecification\Specification.cs" />
     <Compile Include="Infrastructure\Specifications\ConfigureSpecification\SpecificationParameterRebinder.cs" />
     <Compile Include="Infrastructure\Specifications\ConfigureSpecification\SpecificationsExtensions.cs" />

@@ -12,6 +12,7 @@ namespace QuestPlatform.Domain.Infrastructure.Contracts
         Task<IEnumerable<T>> Get();
         IQueryable<T> Query(ISpecification<T> condition);
         Task<T> Insert(T entity);
+        Task<IEnumerable<T>> InsertRange(IEnumerable<T> range);
         Task Delete(Guid id);
         void Update(T entity);
         Task Save();

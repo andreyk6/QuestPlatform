@@ -19,6 +19,8 @@ namespace QuestPlatform.Api
 
             // Web API routes
             config.MapHttpAttributeRoutes();
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
+            config.Formatters.Add(config.Formatters.JsonFormatter);
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",

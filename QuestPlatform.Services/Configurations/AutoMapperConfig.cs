@@ -16,12 +16,9 @@ namespace QuestPlatform.Services.Configurations
             Mapper.Initialize(cfg =>
             {
                 cfg.CreateMap<QuestionDTO, Question>()
+                    .ForMember(dto => dto.Options, dmn => dmn.Ignore())
                     .ReverseMap();
                 cfg.CreateMap<OptionDTO, Option>()
-                    .ReverseMap();
-                cfg.CreateMap<IQueryable<QuestionDTO>, IQueryable<Question>>()
-                    .ReverseMap();
-                cfg.CreateMap<IQueryable<OptionDTO>, IQueryable<Option>>()
                     .ReverseMap();
             });
         }

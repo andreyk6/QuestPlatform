@@ -20,7 +20,7 @@ namespace QuestPlatform.Api.Controllers
     {
         private IQuestionService QuestionManager;
 
-        public QuestionsController():this(new QuestionService(new Repository<Question>(), new Repository<Option>()))
+        public QuestionsController():this(new QuestionService(new QuestionRepository(), new Repository<Option>()))
         {
             
         }
@@ -59,8 +59,8 @@ namespace QuestPlatform.Api.Controllers
 
         [Route("api/questions/")]
         [HttpPost]
-        public async Task<IHttpActionResult> Create(QuestionDTO question)
-        {
+        public async Task<IHttpActionResult> Create([FromBody]QuestionDTO question)
+          {
             try
             {
                 var createdItem = await QuestionManager.CreateQuestion(question);
@@ -78,7 +78,7 @@ namespace QuestPlatform.Api.Controllers
         
         [Route("api/options/{id}")]
         [HttpPut]
-        public async Task<IHttpActionResult> Update(Guid id, OptionDTO option)
+        public async Task<IHttpActionResult> Update(Guid id, [FromBody]OptionDTO option)
         {
             try
             {

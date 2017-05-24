@@ -10,6 +10,6 @@ namespace Models.DTO.Questions
     {
         public Guid Id { get; set; }
         public string Title { get; set; }
-        public IQueryable<OptionDTO> Options { get; set; }
+        public ICollection<OptionDTO> Options { get; set; }
     }
 }

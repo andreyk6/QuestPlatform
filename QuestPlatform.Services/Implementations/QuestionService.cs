@@ -29,7 +29,8 @@ namespace QuestPlatform.Services.Implementations
         public async Task<IEnumerable<QuestionDTO>> GetAll()
         {
             var allDomainItems = await Questions.Get();
-            return Mapper.Map<IEnumerable<QuestionDTO>>(allDomainItems);
+            var questionDTOs = Mapper.Map<IEnumerable<QuestionDTO>>(allDomainItems);
+            return questionDTOs;
         }
 
         public async Task<QuestionDTO> Get(Guid id)
@@ -86,7 +87,17 @@ namespace QuestPlatform.Services.Implementations
         {
             var domainQuestion = Mapper.Map<Question>(question);
             var insertedItem = await Questions.Insert(domainQuestion);
-            return Mapper.Map<QuestionDTO>(insertedItem);
+            var domainOptions = question.Options.Select(s => new Option
+            {
+                QuestionId = insertedItem.Id,
+                Content = s.Content,
+                IsCorrect = s.IsCorrect
+            });
+            var insertedOptions = (await Options.InsertRange(domainOptions)).ToList();
+            question.Id = insertedItem.Id;
+            question.Options = Mapper.Map<ICollection<Option>, 
+                ICollection<OptionDTO>>(insertedOptions);
+            return question;
         }
 
         public async Task<OptionDTO> CreateOption(Guid questionId, OptionDTO option)

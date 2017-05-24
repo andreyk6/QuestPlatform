@@ -33,6 +33,13 @@ namespace QuestPlatform.Domain.Infrastructure.Repositories
             return insertedItem;
         }
 
+        public override async Task<IEnumerable<T>> InsertRange(IEnumerable<T> range)
+        {
+            var items = Set.AddRange(range);
+            await Save();
+            return items;
+        }
+
         public override async Task Delete(Guid id)
         {
             var deletedItem = await Set.FindAsync(id);
