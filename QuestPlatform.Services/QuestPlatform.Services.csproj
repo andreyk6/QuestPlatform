@@ -77,9 +77,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configurations\AutoMapperConfig.cs" />
+    <Compile Include="Contracts\IBeaconsService.cs" />
+    <Compile Include="Contracts\IGameService.cs" />
+    <Compile Include="Contracts\IParkService.cs" />
     <Compile Include="Contracts\IQuestionService.cs" />
+    <Compile Include="Contracts\IQuizService.cs" />
     <Compile Include="Contracts\IUserService.cs" />
     <Compile Include="Exceptions\ItemNotFoundException.cs" />
+    <Compile Include="Implementations\BeaconsService.cs" />
+    <Compile Include="Implementations\ParkService.cs" />
     <Compile Include="Implementations\QuestionService.cs" />
     <Compile Include="Implementations\UserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

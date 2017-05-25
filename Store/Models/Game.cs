@@ -24,6 +24,6 @@ namespace Store.Models
         public virtual Park Park { get; set; }
 
         //List of registered users
-        public virtual IQueryable<UserInGame> Participants { get; set; }
+        public virtual ICollection<UserInGame> Participants { get; set; }
     }
 }

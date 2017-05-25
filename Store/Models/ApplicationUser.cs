@@ -11,9 +11,9 @@ namespace Store.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        public virtual IQueryable<Game> Games { get; set; }
+        public virtual ICollection<Game> Games { get; set; }
 
-        public virtual IQueryable<Quiz> Quizzes { get; set; }
+        public virtual ICollection<Quiz> Quizzes { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType)
         {

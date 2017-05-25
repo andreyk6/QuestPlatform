@@ -13,6 +13,6 @@ namespace Store.Models
         //TODO: Add DB trigger "Score = QuizTasks.Sum(t=>t.Score)/QuizTasks.Count()"
         public int Score { get; set; }
 
-        public virtual IQueryable<QuizTask> QuizTasks { get; set; }
+        public virtual ICollection<QuizTask> QuizTasks { get; set; }
     }
 }

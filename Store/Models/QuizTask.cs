@@ -29,6 +29,6 @@ namespace Store.Models
         /// <summary>
         /// Selected options from Question.Options
         /// </summary>
-        public virtual IQueryable<Option> UserAnswer { get; set; }
+        public virtual ICollection<Option> UserAnswer { get; set; }
     }
 }

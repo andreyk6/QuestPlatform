@@ -19,10 +19,10 @@ namespace Store.Models
         public string ImageUrl { get; set; }
 
 
-        public virtual Guid ManagerId { get; set; }
+        public virtual string ManagerId { get; set; }
         public virtual ApplicationUser Manager { get; set; }
 
-        public virtual IQueryable<BeaconInPark> Beacons { get; set; }
-        public virtual IQueryable<Game> Games { get; set; }
+        public virtual ICollection<BeaconInPark> Beacons { get; set; }
+        public virtual ICollection<Game> Games { get; set; }
     }
 }

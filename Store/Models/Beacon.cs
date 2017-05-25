@@ -13,6 +13,7 @@ namespace Store.Models
         [Key, ForeignKey("BeaconInPark")]
         public Guid Id { get; set; }
         public string UUID { get; set; }
+        public string TresholdRSSI { get; set; }
 
         public Guid BeaconInParkId { get; set; }
         public virtual BeaconInPark BeaconInPark { get; set; }
