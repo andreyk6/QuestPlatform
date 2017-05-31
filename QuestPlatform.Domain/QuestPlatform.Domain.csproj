@@ -68,6 +68,7 @@
     <Compile Include="Infrastructure\Repositories\ParkRepository.cs" />
     <Compile Include="Infrastructure\Repositories\QuestionRepository.cs" />
     <Compile Include="Infrastructure\Repositories\Repository.cs" />
+    <Compile Include="Infrastructure\Repositories\UserInGameRepository.cs" />
     <Compile Include="Infrastructure\Repositories\UserRepository.cs" />
     <Compile Include="Infrastructure\Specifications\Composing\AndSpecification.cs" />
     <Compile Include="Infrastructure\Specifications\Composing\NotSpecification.cs" />

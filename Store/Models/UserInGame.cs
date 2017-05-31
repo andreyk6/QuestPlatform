@@ -10,16 +10,20 @@ namespace Store.Models
 {
     public class UserInGame
     {
-        [Key, ForeignKey("UserAccount")]
-        public string Id { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Guid Id { get; set; }
 
         public Guid QuizId { get; set; }
+        [ForeignKey("QuizId")]
         public virtual Quiz Quiz { get; set; }
 
         public Guid GameId { get; set; }
+        [ForeignKey("GameId")]
         public Game Game { get; set; }
 
         public string ApplicationUserId { get; set; }
+        [ForeignKey("ApplicationUserId")]
         public virtual ApplicationUser UserAccount { get; set; }
     }
 }

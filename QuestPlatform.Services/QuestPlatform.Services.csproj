@@ -85,8 +85,10 @@
     <Compile Include="Contracts\IUserService.cs" />
     <Compile Include="Exceptions\ItemNotFoundException.cs" />
     <Compile Include="Implementations\BeaconsService.cs" />
+    <Compile Include="Implementations\GameService.cs" />
     <Compile Include="Implementations\ParkService.cs" />
     <Compile Include="Implementations\QuestionService.cs" />
+    <Compile Include="Implementations\QuizService.cs" />
     <Compile Include="Implementations\UserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

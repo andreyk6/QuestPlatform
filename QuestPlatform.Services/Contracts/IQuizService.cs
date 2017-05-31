@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Store.Models;
 
 namespace QuestPlatform.Services.Contracts
 {
-    public class IQuizService
+    public interface IQuizService
     {
-        
+        Task GenerateQuizzes(Game forGame);
     }
 }
