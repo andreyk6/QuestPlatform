@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Models.DTO.Beacons;
 using Models.DTO.Questions;
 
 namespace Models.DTO.Quizes

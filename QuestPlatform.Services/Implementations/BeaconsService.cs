@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,7 +24,7 @@ namespace QuestPlatform.Services.Implementations
         
         public async Task<ICollection<BeaconDTO>> GetParkBeacons(Guid parkId)
         {
-            var beaconsInPark = BeaconsInPark.Query(new BeaconsFromPark(parkId)).ToList();
+            var beaconsInPark = await BeaconsInPark.Query(new BeaconsFromPark(parkId)).ToListAsync();
             var dto = Mapper.Map<ICollection<BeaconInPark>, ICollection<BeaconDTO>>(beaconsInPark);
             return dto;
         }  

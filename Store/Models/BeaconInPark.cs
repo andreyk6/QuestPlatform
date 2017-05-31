@@ -10,7 +10,7 @@ namespace Store.Models
 {
     public class BeaconInPark
     {
-        [Key, ForeignKey("Park")]
+        [Key]
         public Guid Id { get; set; }
 
         public Guid ParkId { get; set; }

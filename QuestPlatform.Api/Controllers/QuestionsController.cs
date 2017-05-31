@@ -37,24 +37,24 @@ namespace QuestPlatform.Api.Controllers
             return await QuestionManager.GetAll();
         }
 
-        [Route("api/questions/{questionId}")]
+        [Route("api/questions/{id}")]
         [HttpGet]
         public async Task<QuestionDTO> Get(Guid id)
         {
             return await QuestionManager.Get(id);
         }
 
-        [Route("api/questions/{questionId}/options")]
-        public async Task<IEnumerable<OptionDTO>> GetOptions(Guid questionId)
+        [Route("api/questions/{id}/options")]
+        public async Task<IEnumerable<OptionDTO>> GetOptions(Guid id)
         {
-            return await QuestionManager.GetQuestionOptions(questionId);
+            return await QuestionManager.GetQuestionOptions(id);
         }
 
-        [Route("api/questions/{questionId}/options/{id}")]
+        [Route("api/questions/{id}/options/{optionId}")]
         [HttpGet]
-        public async Task<OptionDTO> GetOptions(Guid questionId, Guid id)
+        public async Task<OptionDTO> GetOptions(Guid id, Guid optionId)
         {
-            return await QuestionManager.GetOption(id);
+            return await QuestionManager.GetOption(optionId);
         }
 
         [Route("api/questions/")]
@@ -95,7 +95,7 @@ namespace QuestPlatform.Api.Controllers
             }
         }
 
-        [Route("api/question/{id}")]
+        [Route("api/questions/{id}")]
         [HttpDelete]
         public async Task<IHttpActionResult> Delete(Guid id)
         {
@@ -110,13 +110,13 @@ namespace QuestPlatform.Api.Controllers
             }
         }
 
-        [Route("api/option/{id}")]
+        [Route("api/questions/{id}/options/{optionId}")]
         [HttpDelete]
-        public async  Task<IHttpActionResult> DeleteOption(Guid id)
+        public async  Task<IHttpActionResult> DeleteOption(Guid id, Guid optionId)
         {
             try
             {
-                await QuestionManager.RemoveOption(id);
+                await QuestionManager.RemoveOption(optionId);
                 return Ok();
             }
             catch (Exception e)
