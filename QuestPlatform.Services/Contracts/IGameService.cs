@@ -14,5 +14,6 @@ namespace QuestPlatform.Services.Contracts
         Task<Game> CreateNewGame(NewGameRequest request);
         Task AddUserToGame(UserInGame user);
         Task StartGame(Guid gameId);
+        Task<Game> GetGame(Guid id);
     }
 }

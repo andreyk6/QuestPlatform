@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity;
 using Models.Requests.Games;
 using QuestPlatform.Services.Contracts;
 using QuestPlatform.Services.Implementations;
+using Store.Enums;
 using Store.Models;
 
 namespace QuestPlatform.Api.Controllers
@@ -62,6 +63,22 @@ namespace QuestPlatform.Api.Controllers
             {
                 return InternalServerError(e);
             }
+        }
+
+        [HttpGet]
+        [Route("/Game/{gameId}/GetQuest")]
+        public async Task<IHttpActionResult> GetQuest(Guid? gameId)
+        {
+            var game = await games.GetGame(gameId.Value);
+            if (!game.GameState.Equals(GameState.Active))
+            {
+                return BadRequest("Game is not started");
+            }
+            var player = game.Participants.FirstOrDefault(p => p.ApplicationUserId
+                .Equals(HttpContext.Current.User.Identity.GetUserId()));
+
+            if (player == null) return InternalServerError();
+            return Ok(player.Quiz);
         }
     }
 }

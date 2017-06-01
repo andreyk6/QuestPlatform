@@ -50,15 +50,13 @@ namespace QuestPlatform.Services.Implementations
         {
             var game = await Games.GetById(gameId);
             game.GameState = GameState.Active;
-            var usersQuests = (await Quizes.GenerateQuizzes(game)).ToList();
-            var i = 0;
-            foreach (var player in game.Participants)
-            {
-                player.QuizId = usersQuests[i].Id;
-                i++;
-                Players.Update(player);
-            }
-            await Players.Save();
+            await Quizes.GenerateQuizzes(game);
+            Games.Update(game);
+        }
+
+        public async Task<Game> GetGame(Guid id)
+        {
+            return await Games.GetById(id);
         }
     }
 }
