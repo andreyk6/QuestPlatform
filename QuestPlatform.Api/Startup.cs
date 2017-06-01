@@ -14,6 +14,7 @@ namespace QuestPlatform.Api
         public void Configuration(IAppBuilder app)
         {
             AutoMapperConfig.Initialize();
+            app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
             ConfigureAuth(app);
         }
     }
