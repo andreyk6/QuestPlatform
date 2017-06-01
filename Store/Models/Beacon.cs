@@ -16,6 +16,7 @@ namespace Store.Models
         public string TresholdRSSI { get; set; }
 
         public Guid BeaconInParkId { get; set; }
+        [ForeignKey("BeaconInParkId")]
         public virtual BeaconInPark BeaconInPark { get; set; }
     }
 }

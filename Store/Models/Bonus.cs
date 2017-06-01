@@ -16,6 +16,7 @@ namespace Store.Models
         public Guid Id { get; set; }
 
         public Guid GameId { get; set; }
+        [ForeignKey("GameId")]
         public virtual Game Game { get; set; }
 
         public DateTime IssueDate { get; set; }

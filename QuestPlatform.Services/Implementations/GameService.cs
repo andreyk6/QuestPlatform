@@ -58,5 +58,19 @@ namespace QuestPlatform.Services.Implementations
         {
             return await Games.GetById(id);
         }
+
+        public async Task<Quiz> CalculateResult(Quiz input)
+        {
+            foreach (var task in input.QuizTasks)
+            {
+                task.Score = task.UserAnswer.Any(o => !o.IsCorrect)
+                    ? 0
+                    : task.UserAnswer.Count(o => o.IsCorrect) / 
+                      task.Question.Options.Count(o => o.IsCorrect);
+            }
+            input.Score = input.QuizTasks.Sum(t => t.Score) / input.QuizTasks.Count();
+            await Quizes.SaveQuizChanges(input);
+            return input;
+        }
     }
 }

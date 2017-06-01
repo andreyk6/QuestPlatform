@@ -13,15 +13,22 @@ namespace QuestPlatform.Services.Implementations
 {
     public class QuizService : IQuizService
     {
-        private IRepository<QuizTask> Quizes;
+        private IRepository<QuizTask> QuizTasks;
         private IRepository<Question> Questions;
         private IRepository<BeaconInPark> Beacons;
+        private IRepository<Quiz> Quizes;
 
         public QuizService()
         {
-            Quizes = new Repository<QuizTask>();
+            Quizes = new Repository<Quiz>();
+            QuizTasks = new Repository<QuizTask>();
             Questions = new QuestionRepository();
             Beacons = new BeaconInParkRepository();
+        }
+
+        public async Task SaveQuizChanges(Quiz toSave)
+        {
+          await Task.Factory.StartNew(() => Quizes.Update(toSave));
         }
 
         public async Task GenerateQuizzes(Game forGame)
@@ -45,7 +52,7 @@ namespace QuestPlatform.Services.Implementations
                         BeaconInParkId = beacon.Id,
                         QuestionId = randQuestion.Id
                     };
-                    await Quizes.Insert(quizTask);
+                    await QuizTasks.Insert(quizTask);
                     player.Quiz.QuizTasks.Add(quizTask);
                 }
             }

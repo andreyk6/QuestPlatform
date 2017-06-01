@@ -80,5 +80,19 @@ namespace QuestPlatform.Api.Controllers
             if (player == null) return InternalServerError();
             return Ok(player.Quiz);
         }
+
+        [HttpPost]
+        public async Task<IHttpActionResult> CalculateResult(Quiz quiz)
+        {
+            try
+            {
+                var calculatedQuiz = await games.CalculateResult(quiz);
+                return Ok(calculatedQuiz);
+            }
+            catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
+        }
     }
 }
