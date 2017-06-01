@@ -10,6 +10,7 @@ namespace Store.Models
 {
     public class Question
     {
+        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
         public string Title { get; set; }
