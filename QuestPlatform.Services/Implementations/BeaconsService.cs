@@ -33,7 +33,7 @@ namespace QuestPlatform.Services.Implementations
         {
             var newParkBeacon = Mapper.Map<BeaconDTO, BeaconInPark>(beacon);
             var registerResultBeacon = await BeaconsInPark.Insert(newParkBeacon);
-            beacon.Id = registerResultBeacon.BeaconId;
+            beacon.Id = registerResultBeacon.Id;
             return beacon;
         }
 
@@ -41,7 +41,7 @@ namespace QuestPlatform.Services.Implementations
         {
             await DeleteBeaconFormPark(parkId, BeaconsInPark.Query(new WithUUID(UUID))
                                                             .FirstOrDefault()
-                                                            .BeaconId);
+                                                            .Id);
         }
 
         public async Task DeleteBeaconFormPark(Guid parkId, Guid beaconId)

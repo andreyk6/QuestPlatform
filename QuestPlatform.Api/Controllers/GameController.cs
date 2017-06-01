@@ -39,6 +39,7 @@ namespace QuestPlatform.Api.Controllers
         }
 
         [HttpGet]
+        [Route("api/Game/Join/{id}")]
         public async Task<IHttpActionResult> Join(Guid? id)
         {
             var user = new UserInGame()
@@ -52,6 +53,7 @@ namespace QuestPlatform.Api.Controllers
         }
 
         [HttpGet]
+        [Route("api/Game/Start/{id}")]
         public async Task<IHttpActionResult> Start(Guid? id)
         {
             try
@@ -66,7 +68,7 @@ namespace QuestPlatform.Api.Controllers
         }
 
         [HttpGet]
-        [Route("/Game/{gameId}/GetQuest")]
+        [Route("api/Game/{gameId}/GetQuest")]
         public async Task<IHttpActionResult> GetQuest(Guid? gameId)
         {
             var game = await games.GetGame(gameId.Value);
@@ -82,6 +84,7 @@ namespace QuestPlatform.Api.Controllers
         }
 
         [HttpPost]
+        [Route("api/Game/CalculateResult/")]
         public async Task<IHttpActionResult> CalculateResult(Quiz quiz)
         {
             try

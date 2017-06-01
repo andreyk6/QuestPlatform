@@ -54,6 +54,7 @@ namespace QuestPlatform.Services.Implementations
                     };
                     await QuizTasks.Insert(quizTask);
                     player.Quiz.QuizTasks.Add(quizTask);
+                    usedQuestions.Add(randQuestion.Id);
                 }
             }
         }
