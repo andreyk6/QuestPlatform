@@ -10,12 +10,11 @@ namespace Store.Models
 {
     public class Beacon
     {
-        [Key, ForeignKey("BeaconInPark")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
         public string UUID { get; set; }
         public string TresholdRSSI { get; set; }
-
-        public Guid BeaconInParkId { get; set; }
+        
         public virtual BeaconInPark BeaconInPark { get; set; }
     }
 }

@@ -10,15 +10,14 @@ namespace Store.Models
 {
     public class BeaconInPark
     {
-        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Key, ForeignKey("Beacon")]
         public Guid Id { get; set; }
 
         public Guid ParkId { get; set; }
-        [ForeignKey("Id")]
+        [ForeignKey("ParkId")]
         public virtual Park Park { get; set; }
-
-        public Guid BeaconId { get; set; }
-        [ForeignKey("Id")]
+        
         public virtual Beacon Beacon { get; set; }
 
         //TODO: Or replace with NextBeaconId and PrevBeaconId?

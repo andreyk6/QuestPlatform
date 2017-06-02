@@ -13,7 +13,7 @@ namespace QuestPlatform.Domain.Infrastructure.Repositories
         public override async Task<Game> GetById(Guid id)
         {
             return await Context.Games.Where(q => q.Id.Equals(id))
-                                            .Include("Users.Game")
+                                            .Include("Participants.Game")
                                             .FirstOrDefaultAsync();
         }
     }
