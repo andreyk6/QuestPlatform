@@ -13,7 +13,7 @@ namespace QuestPlatform.Domain.Context
     {
         public DataDbContext() : base("QuestsDbContext")
         {
-            Database.SetInitializer(new DropCreateDatabaseAlways<DataDbContext>());
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<DataDbContext>());
         }
         public DbSet<Beacon> Beacons { get; set; }
         public DbSet<BeaconInPark> BeaconsInPark { get; set; }

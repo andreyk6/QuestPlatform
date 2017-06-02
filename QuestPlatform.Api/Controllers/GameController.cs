@@ -66,7 +66,7 @@ namespace QuestPlatform.Api.Controllers
         }
 
         [HttpGet]
-        [Route("/Game/{gameId}/GetQuest")]
+        [Route("api/game/{gameId}/GetQuest")]
         public async Task<IHttpActionResult> GetQuest(Guid? gameId)
         {
             var game = await games.GetGame(gameId.Value);
