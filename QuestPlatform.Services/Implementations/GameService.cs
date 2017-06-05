@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Models.DTO.Games;
 using Models.Requests.Games;
 using QuestPlatform.Domain.Infrastructure.Contracts;
 using QuestPlatform.Domain.Infrastructure.Repositories;
+using QuestPlatform.Domain.Infrastructure.Specifications.Concrette.UserInGames;
 using QuestPlatform.Services.Contracts;
 using Store.Enums;
 using Store.Models;
@@ -50,8 +53,19 @@ namespace QuestPlatform.Services.Implementations
         {
             var game = await Games.GetById(gameId);
             game.GameState = GameState.Active;
+            game.Date = DateTime.Now;
             await Quizes.GenerateQuizzes(game);
             Games.Update(game);
+        }
+
+        public async Task<ICollection<GameDTO>> SelectUserGames(string userId)
+        {
+            var players = await Players.Query(new UserWithApplicationUserId(userId))
+                                       .ToListAsync();
+            var userIdGames = (from player in players
+                                select player.Game)
+                              .ToList();
+            return Mapper.Map<ICollection<Game>, ICollection<GameDTO>>(userIdGames);
         }
 
         public async Task<Game> GetGame(Guid id)

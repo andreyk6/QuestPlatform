@@ -18,7 +18,9 @@ namespace Store.Models
         public string TeamName { get; set; }
         //TODO: Add DB trigger "Score = Quizzes.Sum(q=>q.Score)/Quizzes.Count()"
         public int Score { get; set; }
-        
+
+        public DateTime Date { get; set; }
+
         public Guid BonusId { get; set; }
         [ForeignKey("BonusId")]
         public virtual Bonus Bonus { get; set; }
