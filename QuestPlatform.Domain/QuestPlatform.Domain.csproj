@@ -78,6 +78,8 @@
     <Compile Include="Infrastructure\Specifications\Concrette\Parks\ManagerParks.cs" />
     <Compile Include="Infrastructure\Specifications\Concrette\Questions\CorrectAnswerForQuestion.cs" />
     <Compile Include="Infrastructure\Specifications\Concrette\Questions\OptionsForQuestionId.cs" />
+    <Compile Include="Infrastructure\Specifications\Concrette\UserInGames\UserFromGame.cs" />
+    <Compile Include="Infrastructure\Specifications\Concrette\UserInGames\UserWithApplicationUserId.cs" />
     <Compile Include="Infrastructure\Specifications\ConfigureSpecification\Specification.cs" />
     <Compile Include="Infrastructure\Specifications\ConfigureSpecification\SpecificationParameterRebinder.cs" />
     <Compile Include="Infrastructure\Specifications\ConfigureSpecification\SpecificationsExtensions.cs" />

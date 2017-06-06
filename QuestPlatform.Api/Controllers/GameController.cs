@@ -97,5 +97,21 @@ namespace QuestPlatform.Api.Controllers
                 return InternalServerError(e);
             }
         }
+
+        [HttpGet]
+        [Route("api/Game/GetGames")]
+        public async Task<IHttpActionResult> GetGames()
+        {
+            var userId = HttpContext.Current.User.Identity.GetUserId();
+            try
+            {
+                var userGames = await games.SelectUserGames(userId);
+                return Ok(userGames);
+            }
+            catch(Exception e)
+            {
+                return InternalServerError(e);
+            }
+        }
     }
 }

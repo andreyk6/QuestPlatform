@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using QuestPlatform.Domain.Infrastructure.Contracts;
 using QuestPlatform.Domain.Infrastructure.Repositories;
 using QuestPlatform.Domain.Infrastructure.Specifications.Concrette.Beacons;
+using QuestPlatform.Domain.Infrastructure.Specifications.Concrette.UserInGames;
+using QuestPlatform.Domain.Infrastructure.Specifications.ConfigureSpecification;
 using QuestPlatform.Services.Contracts;
 using Store.Models;
 
@@ -17,6 +20,7 @@ namespace QuestPlatform.Services.Implementations
         private IRepository<Question> Questions;
         private IRepository<BeaconInPark> Beacons;
         private IRepository<Quiz> Quizes;
+        private IRepository<UserInGame> Players;
 
         public QuizService()
         {
@@ -24,13 +28,14 @@ namespace QuestPlatform.Services.Implementations
             QuizTasks = new Repository<QuizTask>();
             Questions = new QuestionRepository();
             Beacons = new BeaconInParkRepository();
+            Players = new UserInGameRepository();
         }
 
         public async Task SaveQuizChanges(Quiz toSave)
         {
           await Task.Factory.StartNew(() => Quizes.Update(toSave));
         }
-
+        
         public async Task GenerateQuizzes(Game forGame)
         {
             var beaconsInGame = Beacons.Query(new BeaconsFromPark(forGame.ParkId))
@@ -58,7 +63,7 @@ namespace QuestPlatform.Services.Implementations
                 }
             }
         }
-        
+
         Random random = new Random();
         private Question GetRandomQuestionFrom(List<Question> source, List<Guid> usedQuestions)
         {

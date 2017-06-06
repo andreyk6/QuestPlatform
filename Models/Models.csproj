@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTO\Beacons\BeaconDTO.cs" />
+    <Compile Include="DTO\Games\GameDTO.cs" />
     <Compile Include="DTO\Parks\ParkDTO.cs" />
     <Compile Include="DTO\Questions\OptionDTO.cs" />
     <Compile Include="DTO\Questions\QuestionDTO.cs" />
