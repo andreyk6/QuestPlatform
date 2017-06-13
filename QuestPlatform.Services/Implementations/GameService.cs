@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ using QuestPlatform.Domain.Infrastructure.Contracts;
 using QuestPlatform.Domain.Infrastructure.Repositories;
 using QuestPlatform.Domain.Infrastructure.Specifications.Concrette.UserInGames;
 using QuestPlatform.Services.Contracts;
+using QuestPlatform.Services.Exceptions;
 using Store.Enums;
 using Store.Models;
 
@@ -36,6 +38,7 @@ namespace QuestPlatform.Services.Implementations
         public async Task<Game> CreateNewGame(NewGameRequest request)
         {
             var game = Mapper.Map<NewGameRequest, Game>(request);
+            game.Date = SqlDateTime.MinValue.Value;
             return await Games.Insert(game);
         }
 
@@ -58,6 +61,13 @@ namespace QuestPlatform.Services.Implementations
             Games.Update(game);
         }
 
+        public async Task<Quiz> GetAppUserQuiz(Guid gameId, string userId)
+        {
+            if(gameId.Equals(new Guid()) || String.IsNullOrEmpty(userId))
+                throw new ItemNotFoundException(gameId);
+            return await Quizes.GetQuiz(gameId, userId);
+        }
+
         public async Task<ICollection<GameDTO>> SelectUserGames(string userId)
         {
             var players = await Players.Query(new UserWithApplicationUserId(userId))
@@ -72,6 +82,7 @@ namespace QuestPlatform.Services.Implementations
         {
             return await Games.GetById(id);
         }
+        
 
         public async Task<Quiz> CalculateResult(Quiz input)
         {

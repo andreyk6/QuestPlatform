@@ -9,6 +9,7 @@ using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using Models.Requests.Games;
 using QuestPlatform.Services.Contracts;
+using QuestPlatform.Services.Exceptions;
 using QuestPlatform.Services.Implementations;
 using Store.Enums;
 using Store.Models;
@@ -76,11 +77,19 @@ namespace QuestPlatform.Api.Controllers
             {
                 return BadRequest("Game is not started");
             }
-            var player = game.Participants.FirstOrDefault(p => p.ApplicationUserId
-                .Equals(HttpContext.Current.User.Identity.GetUserId()));
-
-            if (player == null) return InternalServerError();
-            return Ok(player.Quiz);
+            try
+            {
+                var playerQuiz = await games.GetAppUserQuiz(gameId.Value, User.Identity.GetUserId());
+                return Ok(playerQuiz);
+            }
+            catch (ItemNotFoundException e)
+            {
+                return InternalServerError(e);
+            }
+            catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
         }
 
         [HttpPost]

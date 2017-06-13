@@ -16,6 +16,7 @@ namespace QuestPlatform.Services.Contracts
         Task AddUserToGame(UserInGame user);
         Task StartGame(Guid gameId);
         Task<Game> GetGame(Guid id);
+        Task<Quiz> GetAppUserQuiz(Guid gameId, string userId);
         Task<Quiz> CalculateResult(Quiz quiz);
         Task<ICollection<GameDTO>> SelectUserGames(string userId);
     }

@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using QuestPlatform.Domain.Infrastructure.Contracts;
 using Store.Models;
 
 namespace QuestPlatform.Domain.Infrastructure.Repositories
@@ -14,6 +15,11 @@ namespace QuestPlatform.Domain.Infrastructure.Repositories
         {
             Set.Attach(entity);
             Context.Entry(entity).State = EntityState.Modified;
+        }
+
+        public override IQueryable<UserInGame> Query(ISpecification<UserInGame> condition)
+        {
+            return base.Query(condition).Include("Quiz");
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Store.Models
         public string Location { get; set; }
 
         public string ImageUrl { get; set; }
-        
+
         public string ManagerId { get; set; }
         [ForeignKey("ManagerId")]
         public virtual ApplicationUser Manager { get; set; }

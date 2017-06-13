@@ -10,6 +10,7 @@ using QuestPlatform.Domain.Infrastructure.Specifications.Concrette.Beacons;
 using QuestPlatform.Domain.Infrastructure.Specifications.Concrette.UserInGames;
 using QuestPlatform.Domain.Infrastructure.Specifications.ConfigureSpecification;
 using QuestPlatform.Services.Contracts;
+using QuestPlatform.Services.Exceptions;
 using Store.Models;
 
 namespace QuestPlatform.Services.Implementations
@@ -51,6 +52,7 @@ namespace QuestPlatform.Services.Implementations
                 foreach (var player in forGame.Participants)
                 {
                     var randQuestion = GetRandomQuestionFrom(questions, usedQuestions);
+                    
                     var quizTask = new QuizTask()
                     {
                         QuizId = player.QuizId,
@@ -60,6 +62,7 @@ namespace QuestPlatform.Services.Implementations
                     await QuizTasks.Insert(quizTask);
                     player.Quiz.QuizTasks.Add(quizTask);
                     usedQuestions.Add(randQuestion.Id);
+                    questions.Remove(randQuestion);
                 }
             }
         }
@@ -68,13 +71,28 @@ namespace QuestPlatform.Services.Implementations
         private Question GetRandomQuestionFrom(List<Question> source, List<Guid> usedQuestions)
         {
             Question randomQuestion;
-            do
-            {
-                randomQuestion = source[random.Next(source.Count)];
-            }
-            while (usedQuestions.Any(id => id.Equals(randomQuestion.Id)));
-
+            randomQuestion = source[random.Next(source.Count)];
+            
             return randomQuestion;
+        }
+
+
+        public async Task<Quiz> GetQuiz(Guid gameId, string appUserId)
+        {
+            try
+            {
+                var player = Players.Query(new UserWithApplicationUserId(appUserId)
+                    .And(new UserFromGame(gameId)));
+                if (player != null)
+                {
+                    return (await player.FirstOrDefaultAsync()).Quiz;
+                }
+                throw new ItemNotFoundException(gameId);
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

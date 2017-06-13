@@ -10,6 +10,7 @@ namespace QuestPlatform.Services.Contracts
     public interface IQuizService
     {
         Task GenerateQuizzes(Game forGame);
+        Task<Quiz> GetQuiz(Guid gameId, string appUserId);
         Task SaveQuizChanges(Quiz toSave);
     }
 }

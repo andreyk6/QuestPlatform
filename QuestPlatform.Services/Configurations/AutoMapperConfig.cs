@@ -30,7 +30,7 @@ namespace QuestPlatform.Services.Configurations
                 cfg.CreateMap<Game, GameDTO>()
                     .ForMember("GameId", dto => dto.MapFrom(dmn => dmn.Id))
                     .ForMember("TotalScore", dto => dto.MapFrom(dmn => dmn.Score))
-                    .ForMember("Date", dto => dto.MapFrom(dmn => dmn.Date))
+                    .ForMember("GameDate", dto => dto.MapFrom(dmn => dmn.Date))
                     .ReverseMap();
             });
         }
