@@ -36,6 +36,7 @@ namespace QuestPlatform.Services.Implementations
         public async Task<Game> CreateNewGame(NewGameRequest request)
         {
             var game = Mapper.Map<NewGameRequest, Game>(request);
+            game.Date = DateTime.UtcNow;
             return await Games.Insert(game);
         }
 

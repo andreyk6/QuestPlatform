@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using Microsoft.Owin.Security.OAuth;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
 namespace QuestPlatform.Api
@@ -20,7 +21,10 @@ namespace QuestPlatform.Api
 
             // Web API routes
             config.MapHttpAttributeRoutes();
+
+            //Setup JSON formatter
             config.Formatters.Remove(config.Formatters.XmlFormatter);
+            config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             config.Formatters.Add(config.Formatters.JsonFormatter);
 
             config.Routes.MapHttpRoute(
