@@ -11,7 +11,7 @@ namespace Models.DTO.Beacons
         public Guid Id { get; set; }
         public string UUID { get; set; }
 
-        public string TresholdRSSI { get; set; }
+        public int TresholdRSSI { get; set; }
         public string LocationTip { get; set; }
 
         public Guid ParkId { get; set; }

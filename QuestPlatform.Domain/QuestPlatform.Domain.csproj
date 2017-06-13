@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\DataDbContext.cs" />
+    <Compile Include="Context\DataDbInitializer.cs" />
     <Compile Include="Infrastructure\Contracts\IRepository.cs" />
     <Compile Include="Infrastructure\Contracts\ISpecification.cs" />
     <Compile Include="Infrastructure\Contracts\IUserRepository.cs" />
