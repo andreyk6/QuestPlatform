@@ -11,9 +11,12 @@ namespace Models.DTO.Quizes
     public class QuizTaskDTO
     {
         public Guid Id { get; set; }
-        public BeaconDTO Beacon { get; set; }
+        public Guid BeaconInParkId { get; set; }
+        public string NextLocationTip { get; set; }
 
-        public QuestionDTO Question { get; set; }
+        public Guid QuestionId { get; set; }
+        public string QuestionTitle { get; set; }
+        public ICollection<OptionDTO> Options { get; set; }
         public Guid Answer { get; set; }
 
         public int Score
@@ -21,13 +24,13 @@ namespace Models.DTO.Quizes
             get
             {
                 var correctAnswersCount 
-                    = Question.Options.Count(o => o.IsCorrect);
+                    = Options.Count(o => o.IsCorrect);
                 if (correctAnswersCount > 1)
                 {
                     // TODO: MULTIPLE ANSWERS
                 }
 
-                if (Question.Options.Any(op => op.Id.Equals(Answer) && op.IsCorrect))
+                if (Options.Any(op => op.Id.Equals(Answer) && op.IsCorrect))
                 {
                     return 100;
                 }

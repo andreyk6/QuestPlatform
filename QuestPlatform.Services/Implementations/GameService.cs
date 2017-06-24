@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Models.DTO.Games;
+using Models.DTO.Questions;
+using Models.DTO.Quizes;
 using Models.Requests.Games;
 using QuestPlatform.Domain.Infrastructure.Contracts;
 using QuestPlatform.Domain.Infrastructure.Repositories;
@@ -61,11 +63,20 @@ namespace QuestPlatform.Services.Implementations
             Games.Update(game);
         }
 
-        public async Task<Quiz> GetAppUserQuiz(Guid gameId, string userId)
+        public async Task<QuizDTO> GetAppUserQuiz(Guid gameId, string userId)
         {
             if(gameId.Equals(new Guid()) || String.IsNullOrEmpty(userId))
                 throw new ItemNotFoundException(gameId);
-            return await Quizes.GetQuiz(gameId, userId);
+            var quiz = await Quizes.GetQuiz(gameId, userId);
+            var quizDTO = new QuizDTO();
+            quizDTO.Id = quiz.Id;
+            quizDTO.Tasks = Mapper.Map<ICollection<QuizTask>, ICollection<QuizTaskDTO>>(quiz.QuizTasks);
+            foreach (var task in quiz.QuizTasks)
+            {
+                quizDTO.Tasks.FirstOrDefault(t => t.QuestionId.Equals(task.QuestionId)).Options =
+                    Mapper.Map<ICollection<Option>, ICollection<OptionDTO>>(task.Question.Options);
+            }
+            return quizDTO;
         }
 
         public async Task<ICollection<GameDTO>> SelectUserGames(string userId)

@@ -7,6 +7,7 @@ using AutoMapper;
 using Models.DTO.Games;
 using Models.DTO.Parks;
 using Models.DTO.Questions;
+using Models.DTO.Quizes;
 using Models.Requests.Games;
 using Store.Models;
 
@@ -32,6 +33,10 @@ namespace QuestPlatform.Services.Configurations
                     .ForMember("TotalScore", dto => dto.MapFrom(dmn => dmn.Score))
                     .ForMember("GameDate", dto => dto.MapFrom(dmn => dmn.Date))
                     .ReverseMap();
+
+                cfg.CreateMap<QuizTask, QuizTaskDTO>()
+                    .ForMember("NextLocationTip", dto => dto.MapFrom(dmn => dmn.BeaconInPark.NextBeaconLocationTip))
+                    .ForMember("QuestionTitle", dto => dto.MapFrom(dmn => dmn.Question.Title));
             });
         }
     }
