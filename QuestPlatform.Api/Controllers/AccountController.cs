@@ -31,33 +31,37 @@ namespace QuestPlatform.Api.Controllers
     {
         private const string LocalLoginProvider = "Local";
         private IUserService _userService;
+        private ApplicationUserManager _userManager;
 
         public AccountController()
         {
-            _userService = new UserService(HttpContext.Current.Request.GetOwinContext().GetUserManager<ApplicationUserManager>());
+            _userManager = HttpContext.Current.Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            _userService = new UserService(_userManager);
         }
 
         public AccountController(ApplicationUserManager userManager,
             ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
         {
-            _userService = new UserService(userManager);
+            _userManager = userManager;
+            _userService = new UserService(_userManager);
             AccessTokenFormat = accessTokenFormat;
         }
 
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
 
-        // GET api/Account/UserInfo
+        // GET api/Account/me
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
-        [Route("UserInfo")]
-        public UserInfoViewModel GetUserInfo()
+        [Route("me")]
+        public async Task<UserInfoViewModel> GetUserInfo()
         {
             ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
-
+            var roles = (await _userManager.GetRolesAsync(User.Identity.GetUserId())).ToArray();
             return new UserInfoViewModel
             {
                 Email = User.Identity.GetUserName(),
                 HasRegistered = externalLogin == null,
-                LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null
+                LoginProvider = externalLogin?.LoginProvider,
+                Roles = roles
             };
         }
 
@@ -154,10 +158,10 @@ namespace QuestPlatform.Api.Controllers
             model.LoginInfo = new UserLoginInfo(externalData.LoginProvider, externalData.ProviderKey);
 
             var result = await _userService.AddExternalLoginAsync(model);
-            
+
             return Ok();
         }
-        
+
         // GET api/Account/ExternalLogins?returnUrl=%2F&generateState=true
         [AllowAnonymous]
         [Route("ExternalLogins")]
@@ -210,7 +214,7 @@ namespace QuestPlatform.Api.Controllers
             }
 
             var result = await _userService.CreateAsync(model);
-            
+
             return Ok(result);
         }
 
@@ -241,19 +245,23 @@ namespace QuestPlatform.Api.Controllers
             var applicationUser = await _userService.FindByEmailAsync(user.Email);
 
             var response = await _userService.AddExternalLoginAsync(
-                new AddExternalLoginRequest() { UserId = applicationUser.Id
-                , LoginInfo = info.Login});
-            
+                new AddExternalLoginRequest()
+                {
+                    UserId = applicationUser.Id
+                ,
+                    LoginInfo = info.Login
+                });
+
             return Ok(response);
         }
-        
+
         #region Helpers
 
         private IAuthenticationManager Authentication
         {
             get { return Request.GetOwinContext().Authentication; }
         }
-        
+
         private class ExternalLoginData
         {
             public string LoginProvider { get; set; }
